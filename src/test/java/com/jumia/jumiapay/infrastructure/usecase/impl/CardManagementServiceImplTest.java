@@ -4,7 +4,6 @@ import com.jumia.jumiapay.infrastructure.dto.BankCardDTO;
 import com.jumia.jumiapay.persistence.models.BankCard;
 import com.jumia.jumiapay.persistence.service.BankCardService;
 import com.jumia.jumiapay.web.exceptions.BadRequestException;
-import com.jumia.jumiapay.web.util.RestServiceClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,8 +20,6 @@ import static org.mockito.Mockito.when;
 public class CardManagementServiceImplTest {
     @Mock
     private BankCardService bankCardService;
-    @Mock
-    private RestServiceClient restServiceClient;
 
     @InjectMocks
     CardManagementServiceImpl cardManagementService;
@@ -54,8 +51,6 @@ public class CardManagementServiceImplTest {
         when(cardManagementService.resolveCardDetails(cardNumber)).thenThrow(new BadRequestException(anyString()));
     }
 
-    //Given[ExplainYourInput]When[WhatIsDone]Then[ExpectedResult
-
     @Test()
     public void givenCardNumberExistInDBWhenResolveCardDetailsThenReturnBankCardDetails() {
         //Arrange
@@ -74,26 +69,5 @@ public class CardManagementServiceImplTest {
         assertEquals(bankCardDTO.getScheme(), "mastercard");
         assertEquals(bankCardDTO.getType(), "debit");
     }
-
-//    @Test()
-//    public void givenStartAndLimitWhenGetBankCardStatisticsThenReturnBankCardStatResponse() {
-//        //Arrange
-//        int limit = 3;
-//        int start = 1;
-//        bankCard.setBank("FIRST BANK OF NIGERIA PLC");
-//        bankCard.setScheme("mastercard");
-//        bankCard.setType("debit");
-//
-//        //Act
-//        when(bankCardService.findBankCardByCardNumber(cardNumber)).thenReturn(Optional.of(bankCard));
-//        BankCardDTO bankCardDTO = cardManagementService.resolveCardDetails(cardNumber);
-//
-//        //Assert
-//        assertEquals(bankCardDTO.getBank(), "FIRST BANK OF NIGERIA PLC");
-//        assertEquals(bankCardDTO.getScheme(), "mastercard");
-//        assertEquals(bankCardDTO.getType(), "debit");
-//    }
-
-
 
 }
